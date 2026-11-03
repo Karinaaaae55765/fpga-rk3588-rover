@@ -1,0 +1,30 @@
+{
+  "device": null,
+  "max_pending": 8,
+  "max_age_s": 10,
+  "play_timeout_s": 8,
+  "fault_repeat_s": 5,
+  "prompts": {
+    "test": "语音播报测试，声音正常",
+    "arrived": "已到达终点",
+    "task_complete": "任务已完成",
+    "target_lost": "目标丢失，请检查",
+    "target_ambiguous": "检测到多个匹配目标，请重新选择",
+    "camera_error": "摄像头数据异常",
+    "serial_error": "控制板通信异常，请检查连接",
+    "sensor_error": "传感器或目标测距异常，请检查",
+    "motor_error": "电机控制异常，请检查",
+    "path_blocked": "路径受阻，请检查",
+    "search_failed": "搜索任务结束，未确认到达目标",
+    "calibration_required": "尚未完成标定，无法启动任务",
+    "stopped": "任务已停止",
+    "execution_error": "任务运行异常，请查看终端提示",
+    "search_point_arrived": "已到达搜索点，开始观察",
+    "waypoint_p1": "已到达路径点，P1",
+    "waypoint_p2": "已到达路径点，P2",
+    "waypoint_p3": "已到达路径点，P3",
+    "waypoint_p4": "已到达路径点，P4",
+    "waypoint_p5": "已到达路径点，P5",
+    "waypoint_p6": "已到达路径点，P6"
+  }
+}

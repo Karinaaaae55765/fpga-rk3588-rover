@@ -1,0 +1,13 @@
+{
+  "width_m": 6.0,
+  "height_m": 4.0,
+  "resolution_m": 0.10,
+  "footprint_radius_m": 0.23,
+  "fixed_obstacles": [],
+  "start": [0.45, 3.15, 0.0],
+  "station_spacing_m": 0.65,
+  "coverage_spacing_m": 0.25,
+  "reference_waypoints": [[3.10,2.85],[3.75,2.45],[3.35,1.45],[4.55,1.45],[5.55,1.45],[2.20,0.70],[0.55,0.55]],
+  "frame": "metres; axle midpoint; world +X right, +Y up; heading CCW radians",
+  "source": "user-confirmed empty 6x4m arena; random floor objects are runtime obstacles"
+}

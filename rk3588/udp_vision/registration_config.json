@@ -1,0 +1,22 @@
+{
+  "enabled": true,
+  "roi": [0.2, 0.15, 0.8, 0.85],
+  "confirm_frames": 3,
+  "min_score": 0.4,
+  "min_side_pixels": 32,
+  "sharpness_threshold": 20.0,
+  "min_iou": 0.5,
+  "max_frame_age": 0.5,
+  "control_port": 8766,
+  "button": {
+    "enabled": true,
+    "verified": true,
+    "device_name": "adc-keys",
+    "key_code": 139,
+    "debounce_seconds": 0.25
+  },
+  "vlm": {
+    "enabled": false,
+    "timeout_seconds": 5.0
+  }
+}

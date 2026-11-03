@@ -1,0 +1,167 @@
+{
+  "baseline": "../camera_udp_tasks123/build/camera_udp_tasks123_baseline_20261028_204928",
+  "baseline_sha256": "6d8479e4fca3cc2a88c693e653a92724e42bdf76acccdb010bbd554549d4e238",
+  "frame": "drive axle midpoint; start at S, facing world +X; local +Y is left",
+  "world_size_mm": [
+    1900,
+    1267
+  ],
+  "start_world_mm": [
+    130,
+    1140
+  ],
+  "initial_heading_deg": 0,
+  "vehicle": {
+    "length_mm": 200,
+    "width_mm": 145,
+    "track_mm": 110,
+    "front_overhang_mm": 150,
+    "wheel_diameter_mm": 65,
+    "counts_per_rev": 1480,
+    "hardware_calibrated": false
+  },
+  "odometry": {
+    "left_distance_scale": 1.0,
+    "right_distance_scale": 1.0,
+    "agree_degrees": 8,
+    "stop_degrees": 25,
+    "stop_hold_ms": 1000,
+    "trust_ms": 500,
+    "correction_degrees_per_second": 2,
+    "max_correction_degrees": 1,
+    "degraded_max_rpm": 44,
+    "validation_max_rpm": 103
+  },
+  "waypoints": [
+    {
+      "name": "P1",
+      "world_mm": [
+        820,
+        920
+      ]
+    },
+    {
+      "name": "P2",
+      "world_mm": [
+        1110,
+        780
+      ]
+    },
+    {
+      "name": "P3",
+      "world_mm": [
+        880,
+        380
+      ]
+    },
+    {
+      "name": "P4",
+      "world_mm": [
+        1280,
+        380
+      ]
+    },
+    {
+      "name": "P5",
+      "world_mm": [
+        1820,
+        380
+      ]
+    },
+    {
+      "name": "P6",
+      "world_mm": [
+        690,
+        110
+      ]
+    },
+    {
+      "name": "G",
+      "world_mm": [
+        60,
+        40
+      ]
+    }
+  ],
+  "navigation": {
+    "cruise_rpm": 103,
+    "min_forward_rpm": 15,
+    "align_rpm": 22,
+    "pass_radius_mm": 50,
+    "goal_radius_mm": 50,
+    "lookahead_mm": 120,
+    "sample_spacing_mm": 20,
+    "session_seconds": 600,
+    "no_progress_seconds": 60,
+    "preferred_heading_degrees": 75,
+    "preference_extra_degrees": 90,
+    "depart_mm": 350,
+    "repeat_depart_step_mm": 100,
+    "max_depart_mm": 650,
+    "repeat_region_mm": 600,
+    "search_step_degrees": 20,
+    "pre_forward_sector_degrees": 25,
+    "dwell_seconds": 4,
+    "approach_rpm": 35,
+    "approach_mm": 350,
+    "near_rpm": 18,
+    "near_mm": 110,
+    "avoid_forward_rpm": 59,
+    "sector_rpm": 17,
+    "sector_tolerance_degrees": 5,
+    "probe_mm": 80
+  },
+  "notes": [
+    "2026-10-30 image-derived coordinates rounded to 10 mm; not surveyed.",
+    "User confirmed printed sheet only: body may extend beyond paper.",
+    "P1-P6 stop for 4 seconds after settled; G remains stopped.",
+    "Actual obstacles near P3 may prevent reaching the gate; safety thresholds unchanged.",
+    "Odometry hardware calibration remains pending; no hardware verified.",
+    "2026-11-01 requested straight cruise 350 mm/s and avoidance translation 200 mm/s; 65 mm diameter gives 103/59 RPM. Targets require hardware validation; rotation is separately limited."
+  ],
+  "baseline_source_sha256": {
+    "avoidance_controller.sv": "169f09235ae76c67917e1668fd9f478babd29f6c3e7fdf20660c19a073e98773",
+    "board.cst": "db42053b74dadca7b8fc773fa3e9e4a7b03236a17e85818788ed6968133dafea",
+    "bt_gamepad_control.sv": "7c903e15ffbd9771ecc197ed473d964aac149bad81256e94022696d77daef414",
+    "bt_gamepad_rx.sv": "69e62e4f0a330cc9fd1493b94ba692d5e96b9d43a55937985a3d408b8e84c1e3",
+    "camera_frontend.sv": "c2813248b1b865234044c23a091195fa917e45c8f94a68365c26394117a84083",
+    "camera_udp_tasks123_top.sv": "41eeebf67c9fdb1dc9f3f473749d940f8ded53e92cb2ea28f7f48eb13a5d7dee",
+    "cdc_packet_buffer.sv": "4d31132796bb7eb68996260cf3b6c0ccb5485ba61a269e2bd59ae64764b388ec",
+    "clock_reset.sv": "c60828ff178b4783fab754ce676f288b9df23245e0f050f6820d3a34e6cc9f5c",
+    "DIR.v": "bb4be93fc0076a2fc4d52c6954e4ef07b6ac2d88fedba0c281ff1cf1d49d09b9",
+    "dual_motor_control.v": "dd551a9f460446fd670ea49ab7a778e53ef28b85a0ddeaeb6a036650ab2e1ef3",
+    "dual_rpm_command_ramp.v": "c6e19da65e744014bff95b1f8e1f84e50c3c04fc2f0bfadd242112f4b63b96ab",
+    "ethernet_mac_tx.sv": "5f907c64510a764bcfc1d7f0ffa368c1bda26bda63ccba540f7ff4b1bf29fdbf",
+    "ethernet_phy.sv": "f8e0e6e68202774573d5903bc49b29375a7161217f73ae66640b00468fa3cea5",
+    "input_profile.json": "7cafbe47f87f8c76f89e974d857bf4541f989a6ef0291e48bc60cb28c09d1952",
+    "ir_remote_rx.sv": "da84beebed404e361166d5ff4d45b450b50f9680b033db2de471124302e84ae7",
+    "motor_closed_loop.sv": "5f93b065f6ee70e2ef97fd7de32e3eb715d4a91330c0d64f525d267798ffe6be",
+    "motor_control.v": "d92b8d12458d4ab3fc32b4629e164458f13b08386242a92cb41f625fea29be7a",
+    "nav_command_rx.sv": "82af23b5c5cb605983701eca4600cfe4d3a03c681a7cd072a37c17c33e06640d",
+    "nav_math.sv": "40cc355ec7d777e29b2bed1d5165a6877d2e464f86008d48b5f327f461e2450b",
+    "nav_remote_control.sv": "9aeb2f6ba64b74efdcfaa88c7d33c09bf7c31e8c749398495d666a56392c9263",
+    "PI_controller.v": "92f37fa1532b5169c8452b93ada9eda07a4b4660bafd47226f25e693f7f89bc3",
+    "PI_controller_fast.v": "e184be79d5877ae54aaab13b2c9676a3c3005eca7efc53cdd342c82ff564397c",
+    "pose_estimator.sv": "d7443d1d594a43cb69f71a8cf31aabcd6e5854fe937fdd0ea0889e0ed6589ba1",
+    "PWM.v": "e7c587c18ab9c87ad00aa0f41e780cb9519337752a944cbbafcc3efe24c13062",
+    "quadrature_encoder.v": "cd8fc98ef861218fc331912e6a2d588c88c5d2c124f4728c7178345826f1fb70",
+    "remote_drive_control.sv": "4f2527fd34e7da8b3dc4bd60ab9035e6ca8fa11d815e69673d96610102724649",
+    "remote_input_arbiter.sv": "dd9a38157f23aaf0523524021af3043c123a3cf38e9d199d5f4ab20e769a5ee8",
+    "sensor_uart.v": "b13f53fbb824dcb5b0bd7a23c8ba9429a510c0455fd2d380175df6d377b3f506",
+    "single_motor_control.v": "80756cb40a5d864ea2c091ffc0041d70b433e5dfbb79496b0cff294f061206af",
+    "speed_measure.v": "99ba1876dc9f19f38efb947c0bc4ab373dabfdbbf23ff6bcd99a50642975daba",
+    "task123_config.vh": "822ff84bd352d9b3215a3352e9f137baa48d5fefc16f2f550eec1c4e20307d5d",
+    "task123_controller.sv": "60aedacfdcfaa60d98443f962e00e1756dae45199d46fd723a9da876262db46e",
+    "task123_safety.sv": "40be1569a64fd071612d29fa20fc282d850bc3b1a222d235704e1b978d9626fc",
+    "task123_telemetry.sv": "1f624b0d8fde164fbdfab1bb1040acf54bfdbf23ba605bd12e3458b9d2efe559",
+    "tb6612_dual_safe_adapter.v": "6c60e90974090a5662899313468bc5e7fddade9de2aee7b2ad507ada5c5eb6a0",
+    "timing.sdc": "574a22ba173f73268d5f521de9d8c7a922d441d31fe0e6795dc4be50ad3eeef6",
+    "udp_video_tx.sv": "3f1091c01ad9d4d3589dba1e5fecd4db28723fb6673a8419a7a24a6d0d618588"
+  },
+  "controls": {
+    "START": "task3_free_avoidance",
+    "X": "task4_waypoints",
+    "B": "stop"
+  },
+  "boundary_is_physical": false
+}

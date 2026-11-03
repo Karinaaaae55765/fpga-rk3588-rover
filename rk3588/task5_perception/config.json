@@ -1,0 +1,21 @@
+{
+  "vision_root": "/userdata/udp_vision_20261019/rk3588",
+  "receiver": "/root/receiver.py",
+  "model": "/userdata/rk3588-app/models/yolov5s_relu_rk3588.rknn",
+  "source": "192.168.50.2",
+  "source_port": 5000,
+  "port": 6102,
+  "min_score": 0.5,
+  "max_frame_age": 1.0,
+  "confirm_frames": 3,
+  "min_iou": 0.25,
+  "max_track_gap": 0.8,
+  "color": {
+    "min_pixels": 100,
+    "min_fraction": 0.60,
+    "min_margin": 0.20,
+    "black_v": 45,
+    "white_v": 190,
+    "neutral_s": 45
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "vehicle_verified": false,
+  "ground_projection_verified": false,
+  "recognition_envelope_verified": false,
+  "tof_extrinsics_verified": false,
+  "start_pose_verified": false,
+  "evidence": "UNMEASURED: do not enable by changing flags without physical tests",
+  "image_width": 1280,
+  "image_height": 720,
+  "pixel_to_robot_ground_h": null,
+  "camera_matrix": null,
+  "distortion_coefficients": null,
+  "max_holdout_error_m": null,
+  "allowed_holdout_error_m": 0.10,
+  "valid_ground_polygon_px": [],
+  "recognition_min_m": 0.4,
+  "recognition_max_m": 1.5,
+  "recognition_half_fov_rad": 0.45,
+  "tof_association_half_angle_rad": 0.06,
+  "tof_agreement_m": 0.15
+}

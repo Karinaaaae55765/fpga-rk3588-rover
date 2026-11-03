@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="zh-CN">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#101419"><title>ROVER · 实车数据工作台</title><link rel="icon" href="data:,"><link rel="stylesheet" href="styles.css"><script defer src="app.js"></script></head>
+<body>
+<header><a href="/" class="brand"><b>R↗</b><span>ROVER<small>实车数据工作台</small></span></a><span class="tag">LIVE DATA / 真实接入</span><span id="connection">尚未配对</span></header>
+<main>
+  <div class="heading"><div><span class="eyebrow">MISSION WORKSPACE / LIVE</span><h1>看见现场，掌握状态<span>。</span></h1><p>类别与颜色识别 · 固件路线与估计轨迹 · 任务六控制</p></div><span id="address"></span></div>
+  <form id="pair-form" class="pair-panel"><label for="pair-code">板端配对码<input id="pair-code" type="password" required autocomplete="off" placeholder="输入板端启动终端显示的配对码"></label><button class="primary" id="pair-button">连接设备</button><button type="button" id="disconnect" disabled>断开页面连接</button><span id="pair-hint" role="status">配对码仅保存在当前页面内存中。</span></form>
+  <section class="panel" aria-label="任务六控制">
+    <div class="map-inputs">
+      <label>任务<select id="mission-type"><option value="approach">接近可见目标</option><option value="follow-visible">跟随可见人物</option><option value="search">全场搜索（需实体地图）</option></select></label>
+      <label>类别<select id="mission-label"><option value="cup">水杯</option><option value="bottle">水瓶</option><option value="person">人物</option></select></label>
+      <label>颜色<select id="mission-color"><option value="red">红色</option><option value="blue">蓝色</option><option value="green">绿色</option><option value="yellow">黄色</option><option value="orange">橙色</option><option value="cyan">青色</option><option value="purple">紫色</option><option value="black">黑色</option><option value="white">白色</option><option value="gray">灰色</option><option value="">不限颜色</option></select></label>
+      <label>停车/跟随距离（m）<input id="mission-distance" type="number" value="0.5" min="0.45" max="1.5" step="0.05"></label>
+    </div>
+    <div class="mission-bar"><div><strong id="motion-state">等待连接</strong><p id="mission-reason">连接后读取执行条件；不会自动启动车轮。</p></div><button id="mission-start" class="primary" disabled>▶ 启动任务六</button><button id="mission-stop" class="danger" disabled>■ 停止任务六</button></div>
+    <p class="note">可见目标模式不要求回到地图起点，但仍须真实运动及地面测距标定。人物颜色指上身区域。关闭、隐藏页面或控制连接超时会停止当前 UI 任务；停止结果以新鲜遥测为准。</p>
+  </section>
+  <div class="status-strip"><span>视频 <b id="video-status">未连接</b></span><span>NPU <b id="npu-status">未知</b></span><span>UART <b id="uart-status">未连接</b></span><span>位置 <b id="pose-status">未初始化</b></span><span>轮速 <b id="wheel-status">—</b></span></div>
+  <div class="workspace">
+    <section class="panel"><div class="panel-title"><h2>01 / 小车运行路线</h2><span class="tag muted">固件预设路线</span></div>
+      <p class="note">实体打印地图 1900 × 1266.67 mm；固件高度取整为 1267 mm。坐标原点位于左下角。</p>
+      <div class="map-inputs"><label>初始 X（m）<input id="pose-x" type="number" min="0" max="1.9" step="0.01" placeholder="实车坐标"></label><label>初始 Y（m）<input id="pose-y" type="number" min="0" max="1.267" step="0.01" placeholder="实车坐标"></label><label>朝向（°）<input id="pose-heading" type="number" min="-180" max="180" step="1" placeholder="+X 为 0"></label><button id="pose-set" disabled>停稳后初始化位置</button></div>
+      <canvas id="map" width="800" height="600" aria-label="实体打印地图上的固件预设路线：S、P1、P2、P3、P4、P5、P6、G；非实测轨迹"></canvas>
+      <ul id="route-points" class="detections" aria-label="路径点坐标，单位米"></ul>
+      <p id="plan-message" class="note" role="status">路线来自 20261102_120015 固件快照，点位按原图取整，未经现场测绘。P1–P6 配置停留 4 s，G 停车。绿色为固件预设路线，橙色为里程计估计轨迹；初始坐标需人工指定，未标定比例可能产生明显误差。固件烧录版本和预设路径到点状态未核验。</p>
+      <div class="metrics"><div><span>估计位置（m）</span><strong id="pose-value">未初始化</strong></div><div><span>预设路线长度</span><strong id="route-length">—</strong></div><div><span>到点状态</span><strong>未接入</strong></div></div>
+    </section>
+    <section class="panel"><div class="panel-title"><h2>02 / 现场图像与识别</h2><span id="frame-id" class="tag muted">无有效帧</span></div><div class="viewport"><img id="video" alt="来自 RK3588 的实时识别画面" hidden><div id="video-placeholder"><strong>等待有效画面</strong><span>配对后显示真实数据，不回退到模拟场景</span></div></div><div class="metrics"><div><span>平均处理帧率</span><strong id="fps">—</strong></div><div><span>检测耗时</span><strong id="inference">—</strong></div><div><span>本机完整帧年龄</span><strong id="frame-age">—</strong></div></div><p class="note">画面包含类别与颜色，mixed 表示混色，unknown 表示无法判断。颜色占比是区域像素占比，不是识别置信度。帧年龄从板端收齐图像起计算，不等于端到端延迟。</p><ul id="detections" class="detections"><li>等待检测结果</li></ul><p id="vision-error" class="error" role="status"></p></section>
+  </div>
+  <div class="lower-grid">
+    <section class="panel"><div class="panel-title"><h2>03 / 目标登记</h2><span id="registration-state" class="tag muted">未连接</span></div><div class="content"><p id="registration-reason">将单个目标放入画面登记框，稳定后确认。</p><strong id="candidate">—</strong><p id="stable">稳定帧数 —</p><button id="confirm" class="primary wide" disabled>＋ 确认登记目标</button><button id="arm" class="wide" disabled>开始新一轮登记</button><p class="note">确认会在板端保存该目标的裁剪图片与元数据，不会启动小车。</p><div class="saved"><span>已登记目标</span><strong id="target-id">—</strong></div></div></section>
+    <section class="panel"><div class="panel-title"><h2>04 / 传感器遥测</h2><span class="tag muted">115200 / CRC16</span></div><div class="content"><span class="eyebrow">前方距离</span><div id="distance" class="distance">—</div><div class="attitude"><div>横滚 Roll<strong id="roll">—</strong></div><div>俯仰 Pitch<strong id="pitch">—</strong></div><div>航向 Yaw<strong id="yaw">—</strong></div></div><p id="telemetry-info" class="note">尚未收到有效串口帧</p><p id="telemetry-error" class="error"></p></div></section>
+    <section class="panel"><div class="panel-title"><h2>05 / 接入状态</h2></div><div class="content"><ul class="capabilities"><li>视频与识别<span id="cap-vision">待验证</span></li><li>传感器数据<span id="cap-telemetry">待验证</span></li><li>目标身份重识别<span>未接入</span></li><li>类别与颜色<span id="cap-color">待连接</span></li><li>里程计估计位置<span id="cap-pose">未初始化</span></li><li>任务六控制<span id="cap-motion">待连接</span></li><li>绝对定位 / SLAM<span>未接入</span></li></ul><p class="note">任务六必须主动启动并通过标定与状态检查。停止按钮只控制本服务的任务，不替代车上物理停车控制。</p></div></section>
+  </div>
+  <section class="panel"><div class="panel-title"><h2>06 / 页面事件</h2><button id="clear-events">清空本页日志</button></div><ol id="events"></ol></section>
+  <footer><span>ROVER / LIVE BRIDGE v0.1</span><span>真实数据过期即清除 · 无开机自动运动</span></footer>
+</main>
+</body></html>

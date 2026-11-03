@@ -1,0 +1,3 @@
+#!/bin/sh
+# BusyBox init entry. No systemd dependency; no motor commands.
+exec /usr/bin/python3 -B /userdata/udp_vision_20261019/autostart.py "${1:-start}"
